@@ -1,11 +1,62 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="Gdg">
 	<head>
 		<title></title>
+		<link href='stylesheets/bootstrap.css' rel='stylesheet' type='text/css'>
 		<link href='stylesheets/screen.css' rel='stylesheet' type='text/css'>
 	</head>
-	<body>
+	<body> 
+		<script>
+		    document.persons = {
+				"list": [
+					{ "firstName":"John" , "lastName":"Doe", "id": "23456789", "phone": "23456789", "address": "temp address", "lastSeen": "13-11-2013" }, 
+					{ "firstName":"Anna" , "lastName":"Smith", "id": "56876", "phone": "7678989", "address": "temp address2", "lastSeen": "17-11-2013" }, 
+					{ "firstName":"Peter" , "lastName":"Jones", "id": "856", "phone": "0998887", "address": "temp address3", "lastSeen": "14-11-2013" }
+				]
+		    };
+		</script>
+		<div class="container" ng-controller="personsController">
+			<div class="row">
+				<h1>
+					{{data.title}}
+				</h1>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+				</div>
+				<div class="table-general table-responsive">
+	                
+	                <table class="table">
+	                    <thead>
+	                        <tr>
+	                            <td class="name" ng-click="personsController.orderBy='firstName';">First Name</td>
+	                            <td class="name" ng-click="personsController.orderBy='lastName';">Last Name</td>
+	                            <td class="id" ng-click="personsController.orderBy='id';">ID</td>
+	                            <td class="phone" ng-click="personsController.orderBy='phone';">Phone</td>
+	                            <td class="address" ng-click="personsController.orderBy='address';">Address</td>
+	                            <td class="date" ng-click="personsController.orderBy='lastSeen';">Last Seen</td>
+	                            <td class="actions">Actions</td>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr ng-repeat="item in data.list | filter:searchText | orderBy:personsController.orderBy">
+	                            <td class="name">{{item.firstName}}</td>
+	                            <td class="name">{{item.lastName}}</td>
+								<td class="id">{{item.id}}</td>
+								<td class="phone">{{item.phone}}</td>
+								<td class="address">{{item.address}}</td>
+								<td class="date">{{item.lastSeen}}</td>
+								<td class="actions">
+	                                <a href="#" class="btn btn-xs btn-warning">Orange</a>
+	                                <a href="#" class="btn btn-xs btn-success">Green</a>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+            	</div>
+			</div>
+		</div>
 		<script src="js/angular.js"></script>
-		<script src="js/jquery.js"></script>	
+		<script src="js/jquery.js"></script>
+		<script src="js/global.js"></script>
 	</body>
 </html>
